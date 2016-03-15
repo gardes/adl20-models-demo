@@ -1,0 +1,53 @@
+archetype (adl_version=2.0.4; rm_release=1.0.2)
+    openEHR-EHR-EVALUATION.test.v1.0.0
+
+language
+    original_language = <[ISO_639-1::en]>
+    
+description
+    copyright = <"">
+    details = <
+        ["en"] = <
+            language = <[ISO_639-1::en]>
+            purpose = <"">
+        >
+    >
+    lifecycle_state = <"unmanaged">
+
+definition
+    EVALUATION[id1] matches {    -- test
+        data matches {
+            ITEM_TREE[id2] occurrences matches {0..1} matches {    -- rfer
+                items matches {
+                    ELEMENT[id3] occurrences matches {0..1} matches {    -- rer
+                        value matches {
+                            DV_DURATION[id4] matches {
+                                value matches {PTHM}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        other_participations
+        protocol
+    }
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1"] = <
+                text = <"test">
+                description = <"test">
+            >
+            ["id2"] = <
+                text = <"rfer">
+                description = <"re">
+            >
+            ["id3"] = <
+                text = <"rer">
+                description = <"er">
+            >
+        >
+    >
+
