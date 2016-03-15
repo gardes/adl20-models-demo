@@ -1,0 +1,114 @@
+template (adl_version=2.0.5; rm_release=1.0.2; generated)
+    openEHR-EHR-COMPOSITION.ddwew.v1.0.0
+
+specialize
+    openEHR-EHR-COMPOSITION.encounter.v1.0.0
+
+language
+    original_language = <[ISO_639-1::en]>
+    translations = <
+        ["sl"] = <
+            author = <
+                ["name"] = <"?">
+            >
+            language = <[ISO_639-1::sl]>
+        >
+    >
+    
+description
+    copyright = <"copyright (c) 2010 openEHR Foundation">
+    details = <
+        ["en"] = <
+            keywords = <"progress", "note", "encounter">
+            language = <[ISO_639-1::en]>
+            misuse = <"">
+            purpose = <"Record of encounter as a progress note.">
+            use = <"">
+        >
+        ["sl"] = <
+            keywords = <"progress", "note", "encounter">
+            language = <[ISO_639-1::sl]>
+            misuse = <"">
+            purpose = <"Record of encounter as a progress note.">
+            use = <"">
+        >
+    >
+    lifecycle_state = <"unmanaged">
+    original_author = <
+        ["organisation"] = <"Ocean Informatics">
+        ["name"] = <"Thomas Beale">
+        ["date"] = <"2005-10-10">
+    >
+
+definition
+    COMPOSITION[id1.1] matches {    -- Encounter
+        content matches {
+            use_archetype EVALUATION[id0.2, openEHR-EHR-EVALUATION.ovl-ddwew-test-001.v1.0.0]
+            use_archetype INSTRUCTION[id0.4, openEHR-EHR-INSTRUCTION.ovl-ddwew-medication-001.v1.0.0]
+        }
+    }
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1.1"] = <
+                text = <"Encounter">
+                description = <"Generic encounter or progress note composition">
+            >
+        >
+        ["sl"] = <
+            ["id1.1"] = <
+                text = <"Encounter">
+                description = <"Generic encounter or progress note composition">
+            >
+        >
+    >
+
+
+---------------------------------------------------------------------------------
+template_overlay
+    openEHR-EHR-EVALUATION.ovl-ddwew-test-001.v1.0.0
+
+specialize
+    openEHR-EHR-EVALUATION.test.v1.0.0
+
+definition
+    EVALUATION[id1.1]     -- test
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1.1"] = <
+                text = <"test">
+                description = <"test">
+            >
+        >
+    >
+
+
+---------------------------------------------------------------------------------
+template_overlay
+    openEHR-EHR-INSTRUCTION.ovl-ddwew-medication-001.v1.0.0
+
+specialize
+    openEHR-EHR-INSTRUCTION.medication.v1.0.0
+
+definition
+    INSTRUCTION[id1.1]     -- Medication instruction
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1.1"] = <
+                text = <"Medication instruction">
+                description = <"Details of a medicine, vaccine or other therapeutic good with instructions for use.">
+            >
+        >
+        ["sl"] = <
+            ["id1.1"] = <
+                text = <"*Medication instruction(en)">
+                description = <"*Details of a medicine, vaccine or other therapeutic good with instructions for use.(en)">
+            >
+        >
+    >
+
