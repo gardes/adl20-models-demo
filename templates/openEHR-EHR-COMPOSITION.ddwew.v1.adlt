@@ -46,6 +46,14 @@ definition
             use_archetype EVALUATION[id0.2, openEHR-EHR-EVALUATION.ovl-ddwew-test-001.v1.0.0]
             use_archetype INSTRUCTION[id0.4, openEHR-EHR-INSTRUCTION.ovl-ddwew-medication-001.v1.0.0]
         }
+        category matches {
+            DV_CODED_TEXT[id4.1] occurrences matches {0} matches {
+                defining_code matches {[at1]}
+            }
+        }
+        context matches {
+            EVENT_CONTEXT[id5.1] occurrences matches {0} 
+        }
     }
 
 terminology
@@ -94,7 +102,162 @@ specialize
     openEHR-EHR-INSTRUCTION.medication.v1.0.0
 
 definition
-    INSTRUCTION[id1.1]     -- Medication instruction
+    INSTRUCTION[id1.1] matches {    -- Medication instruction
+        /activities[id2]/description[id3]/items matches {
+            ELEMENT[id4.1] occurrences matches {0} matches {    -- Medicine
+                value matches {
+                    DV_TEXT[id57.1] 
+                }
+            }
+            ELEMENT[id10.1] occurrences matches {0} matches {    -- Directions
+                value matches {
+                    DV_TEXT[id58.1] 
+                }
+            }
+            ELEMENT[id48.1] occurrences matches {0} matches {    -- Formatted directions
+                value matches {
+                    DV_PARSABLE[id59.1] 
+                }
+            }
+            ELEMENT[id6.1] occurrences matches {0} matches {    -- Dose description
+                value matches {
+                    DV_TEXT[id60.1] 
+                }
+            }
+            ELEMENT[id56.1] occurrences matches {0} matches {    -- Parsable dose description
+                value matches {
+                    DV_PARSABLE[id61.1] 
+                }
+            }
+            CLUSTER[id11] occurrences matches {0..1} matches {
+                items matches {
+                    ELEMENT[id9.1] occurrences matches {0} matches {    -- Timing description
+                        value matches {
+                            DV_TEXT[id62.1] 
+                        }
+                    }
+                    ELEMENT[id30.1] occurrences matches {0} matches {    -- PRN
+                        value matches {
+                            DV_BOOLEAN[id63.1] matches {
+                                value matches {True, False}
+                            }
+                        }
+                    }
+                    ELEMENT[id12.1] occurrences matches {0} matches {    -- Start criterion
+                        value matches {
+                            DV_TEXT[id64.1] 
+                        }
+                    }
+                    ELEMENT[id13.1] occurrences matches {0} matches {    -- Start date
+                        value matches {
+                            DV_DATE_TIME[id65.1] 
+                        }
+                    }
+                    ELEMENT[id17.1] occurrences matches {0} matches {    -- Stop criterion
+                        value matches {
+                            DV_TEXT[id66.1] 
+                        }
+                    }
+                    ELEMENT[id14.1] occurrences matches {0} matches {    -- Stop date
+                        value matches {
+                            DV_DATE_TIME[id67.1] 
+                        }
+                    }
+                    ELEMENT[id16.1] occurrences matches {0} matches {    -- Number of administrations
+                        value matches {
+                            DV_COUNT[id70.1] 
+                        }
+                    }
+                    ELEMENT[id18.1] occurrences matches {0} matches {    -- Long-term
+                        value matches {
+                            DV_BOOLEAN[id71.1] matches {
+                                value matches {True, False}
+                            }
+                        }
+                    }
+                }
+            }
+            CLUSTER[id52.1] occurrences matches {0} matches {    -- Maximum dose
+                items matches {
+                    ELEMENT[id54.1] occurrences matches {0} matches {    -- Allowed period
+                        value matches {
+                            DV_DURATION[id72.1] matches {
+                                value matches {PYMWD/|>=PT0S|}
+                            }
+                            DV_CODED_TEXT[id73.1] matches {
+                                defining_code matches {[at55]}
+                            }
+                        }
+                    }
+                }
+            }
+            ELEMENT[id45.1] occurrences matches {0} matches {    -- Additional instruction
+                value matches {
+                    DV_TEXT[id74.1] 
+                }
+            }
+            ELEMENT[id19.1] occurrences matches {0} matches {    -- Clinical Indication
+                value matches {
+                    DV_TEXT[id75.1] 
+                }
+            }
+            ELEMENT[id36.1] occurrences matches {0} matches {    -- Comment
+                value matches {
+                    DV_TEXT[id76.1] 
+                }
+            }
+            CLUSTER[id24] occurrences matches {0..1} matches {
+                items matches {
+                    ELEMENT[id26.1] occurrences matches {0} matches {    -- Number of repeats
+                        value matches {
+                            DV_COUNT[id77.1] matches {
+                                magnitude matches {|>=0|}
+                            }
+                        }
+                    }
+                    ELEMENT[id47.1] occurrences matches {0} matches {    -- Minimum interval between repeats
+                        value matches {
+                            DV_DURATION[id78.1] 
+                        }
+                    }
+                    ELEMENT[id27.1] occurrences matches {0} matches {    -- Brand substitution permitted
+                        value matches {
+                            DV_BOOLEAN[id79.1] matches {
+                                value matches {True, False}
+                            }
+                        }
+                    }
+                    ELEMENT[id29.1] occurrences matches {0} matches {    -- Dispensing instructions
+                        value matches {
+                            DV_TEXT[id80.1] 
+                        }
+                    }
+                }
+            }
+            ELEMENT[id50.1] occurrences matches {0} matches {    -- Past days of therapy
+                value matches {
+                    DV_COUNT[id81.1] 
+                }
+            }
+        }
+        /protocol[id32]/items matches {
+            ELEMENT[id39.1] occurrences matches {0} matches {    -- Indication for authorised use
+                value matches {
+                    DV_TEXT[id82.1] 
+                }
+            }
+            ELEMENT[id33.1] occurrences matches {0} matches {    -- Medication Instruction Id
+                value matches {
+                    DV_IDENTIFIER[id83.1] 
+                }
+            }
+            ELEMENT[id43.1] occurrences matches {0} matches {    -- Concession benefit
+                value matches {
+                    DV_TEXT[id84.1] 
+                }
+            }
+        }
+    }
 
 terminology
     term_definitions = <
@@ -103,11 +266,219 @@ terminology
                 text = <"Medication instruction">
                 description = <"Details of a medicine, vaccine or other therapeutic good with instructions for use.">
             >
+            ["id4.1"] = <
+                text = <"Medicine">
+                description = <"The medicine, vaccine or other therapeutic good being ordered, administered to or used by the subject of care. This item should be coded if possible.">
+            >
+            ["id10.1"] = <
+                text = <"Directions">
+                description = <"A complete narrative description of how much, when and how to use the medicine, vaccine or other therapeutic good.">
+            >
+            ["id48.1"] = <
+                text = <"Formatted directions">
+                description = <"A complete narrative description, with optional markup or formatting of how much, when and how to use the medicine, vaccine or other therapeutic good.">
+            >
+            ["id6.1"] = <
+                text = <"Dose description">
+                description = <"The amount and units of the medicine, vaccine or other therapeutic good to be used or administered at one time.">
+            >
+            ["id56.1"] = <
+                text = <"Parsable dose description">
+                description = <"*">
+            >
+            ["id9.1"] = <
+                text = <"Timing description">
+                description = <"The timing of the doses, which may include frequency and details such as relationship to food.">
+            >
+            ["id30.1"] = <
+                text = <"PRN">
+                description = <"The timing is dependent within limits on the subject of care's condition or symptoms  (e.g. 4hrly p.r.n. means the medicine can be taken as frequently as every four hours if necessary). \"Pro re nata\" in latin means as circumstances arise.">
+            >
+            ["id12.1"] = <
+                text = <"Start criterion">
+                description = <"A condition which, when met, requires the start of administration or use.">
+            >
+            ["id13.1"] = <
+                text = <"Start date">
+                description = <"The date and optional time to begin using the medicine, vaccine or other therapeutic good.">
+            >
+            ["id17.1"] = <
+                text = <"Stop criterion">
+                description = <"A condition which, when met, requires the cessation of administration or use.">
+            >
+            ["id14.1"] = <
+                text = <"Stop date">
+                description = <"The date and optional time to stop using the medicine, vaccine or other therapeutic good.">
+            >
+            ["id16.1"] = <
+                text = <"Number of administrations">
+                description = <"The total number of doses of the medicine, vaccine or other therapeutic good that are to be used or administered (from the initial dose to the final dose).">
+            >
+            ["id18.1"] = <
+                text = <"Long-term">
+                description = <"It is anticipated that the medicine, vaccine or therapeutic good will be re-prescribed or re-dispensed over a period of time.">
+            >
+            ["id54.1"] = <
+                text = <"Allowed period">
+                description = <"The allowed period for the maiximal dose.">
+            >
+            ["id52.1"] = <
+                text = <"Maximum dose">
+                description = <"Details of maximum dose allowed over a defined period, including lifetime usage.">
+            >
+            ["id45.1"] = <
+                text = <"Additional instruction">
+                description = <"An additional statement on how to use the medicine, vaccine or other therapeutic good.">
+            >
+            ["id19.1"] = <
+                text = <"Clinical Indication">
+                description = <"A reason for ordering the medicine, vaccine or other therapeutic good.">
+            >
+            ["id36.1"] = <
+                text = <"Comment">
+                description = <"Any additional information that may be needed to ensure the continuity of supply, rationale for current dose and timing, or safe and appropriate use.">
+            >
+            ["id26.1"] = <
+                text = <"Number of repeats">
+                description = <"The number of times the expressed quantity of medicine, vaccine or other therapeutic good may be refilled or redispensed without a new prescription.">
+            >
+            ["id47.1"] = <
+                text = <"Minimum interval between repeats">
+                description = <"The minimum time between repeat dispensing of the medicine, vaccine or therapeutic good. Note: This is specified by the ordering clinician for a specific reason such as safety or best practice.">
+            >
+            ["id27.1"] = <
+                text = <"Brand substitution permitted">
+                description = <"Indicates whether or not the substitution of a prescribed medicine with a different brand name of the same medicine, vaccine or other therapeutic good, which has been determined as bioequivalent, is allowed when the medication is dispensed/supplied.">
+            >
+            ["id29.1"] = <
+                text = <"Dispensing instructions">
+                description = <"Additional instructions to the person dispensing the medicine, vaccine or other therapeutic good.">
+            >
+            ["id50.1"] = <
+                text = <"Past days of therapy">
+                description = <"Number of days patient was on this therapy prior to this instruction (Patient was taking antibiotics three days prior to hospital admission).">
+            >
+            ["id39.1"] = <
+                text = <"Indication for authorised use">
+                description = <"The specific indication for use that is required by an authorising agency to achieve subsidy for or access to the medicine, vaccine or other therapeutic good. This could be a national medication scheme, insurance company or other funding agency.">
+            >
+            ["id33.1"] = <
+                text = <"Medication Instruction Id">
+                description = <"An identifier used in an external system and associated with this medication instruction.">
+            >
+            ["id43.1"] = <
+                text = <"Concession benefit">
+                description = <"Indicates the category of subsidy appropriate to the item being prescribed.">
+            >
         >
         ["sl"] = <
             ["id1.1"] = <
                 text = <"*Medication instruction(en)">
                 description = <"*Details of a medicine, vaccine or other therapeutic good with instructions for use.(en)">
+            >
+            ["id4.1"] = <
+                text = <"*Medicine(en)">
+                description = <"*The medicine, vaccine or other therapeutic good being ordered, administered to or used by the subject of care. This item should be coded if possible.(en)">
+            >
+            ["id10.1"] = <
+                text = <"*Directions(en)">
+                description = <"*A complete narrative description of how much, when and how to use the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id48.1"] = <
+                text = <"*Formatted directions(en)">
+                description = <"*A complete narrative description, with optional markup or formatting of how much, when and how to use the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id6.1"] = <
+                text = <"*Dose description(en)">
+                description = <"*The amount and units of the medicine, vaccine or other therapeutic good to be used or administered at one time.(en)">
+            >
+            ["id56.1"] = <
+                text = <"*New element(en)">
+                description = <"**(en)">
+            >
+            ["id9.1"] = <
+                text = <"*Timing description(en)">
+                description = <"*The timing of the doses, which may include frequency and details such as relationship to food.(en)">
+            >
+            ["id30.1"] = <
+                text = <"*PRN(en)">
+                description = <"*The timing is dependent within limits on the subject of care's condition or symptoms  (e.g. 4hrly p.r.n. means the medicine can be taken as frequently as every four hours if necessary). \"Pro re nata\" in latin means as circumstances arise.(en)">
+            >
+            ["id12.1"] = <
+                text = <"*Start criterion(en)">
+                description = <"*A condition which, when met, requires the start of administration or use.(en)">
+            >
+            ["id13.1"] = <
+                text = <"*Start date(en)">
+                description = <"*The date and optional time to begin using the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id17.1"] = <
+                text = <"*Stop criterion(en)">
+                description = <"*A condition which, when met, requires the cessation of administration or use.(en)">
+            >
+            ["id14.1"] = <
+                text = <"*Stop date(en)">
+                description = <"*The date and optional time to stop using the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id16.1"] = <
+                text = <"*Number of administrations(en)">
+                description = <"*The total number of doses of the medicine, vaccine or other therapeutic good that are to be used or administered (from the initial dose to the final dose).(en)">
+            >
+            ["id18.1"] = <
+                text = <"*Long-term(en)">
+                description = <"*It is anticipated that the medicine, vaccine or therapeutic good will be re-prescribed or re-dispensed over a period of time.(en)">
+            >
+            ["id54.1"] = <
+                text = <"*New element(en)">
+                description = <"**(en)">
+            >
+            ["id52.1"] = <
+                text = <"*New cluster(en)">
+                description = <"**(en)">
+            >
+            ["id45.1"] = <
+                text = <"*Additional instruction(en)">
+                description = <"*An additional statement on how to use the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id19.1"] = <
+                text = <"*Clinical Indication(en)">
+                description = <"*A reason for ordering the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id36.1"] = <
+                text = <"*Comment(en)">
+                description = <"*Any additional information that may be needed to ensure the continuity of supply, rationale for current dose and timing, or safe and appropriate use.(en)">
+            >
+            ["id26.1"] = <
+                text = <"*Number of repeats(en)">
+                description = <"*The number of times the expressed quantity of medicine, vaccine or other therapeutic good may be refilled or redispensed without a new prescription.(en)">
+            >
+            ["id47.1"] = <
+                text = <"*Minimum interval between repeats(en)">
+                description = <"*The minimum time between repeat dispensing of the medicine, vaccine or therapeutic good. Note: This is specified by the ordering clinician for a specific reason such as safety or best practice.(en)">
+            >
+            ["id27.1"] = <
+                text = <"*Brand substitution permitted(en)">
+                description = <"*Indicates whether or not the substitution of a prescribed medicine with a different brand name of the same medicine, vaccine or other therapeutic good, which has been determined as bioequivalent, is allowed when the medication is dispensed/supplied.(en)">
+            >
+            ["id29.1"] = <
+                text = <"*Dispensing instructions(en)">
+                description = <"*Additional instructions to the person dispensing the medicine, vaccine or other therapeutic good.(en)">
+            >
+            ["id50.1"] = <
+                text = <"*Past days of therapy(en)">
+                description = <"*Number of days patient was on this therapy prior to this instruction (Patient was taking antibiotics three days prior to hospital admission).(en)">
+            >
+            ["id39.1"] = <
+                text = <"*Indication for authorised use(en)">
+                description = <"*The specific indication for use that is required by an authorising agency to achieve subsidy for or access to the medicine, vaccine or other therapeutic good. This could be a national medication scheme, insurance company or other funding agency.(en)">
+            >
+            ["id33.1"] = <
+                text = <"*Medication Instruction Id(en)">
+                description = <"*An identifier used in an external system and associated with this medication instruction.(en)">
+            >
+            ["id43.1"] = <
+                text = <"*Concession benefit(en)">
+                description = <"*Indicates the category of subsidy appropriate to the item being prescribed.(en)">
             >
         >
     >
